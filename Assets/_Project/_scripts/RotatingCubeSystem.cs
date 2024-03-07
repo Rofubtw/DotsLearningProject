@@ -15,12 +15,14 @@ namespace LearningDots
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            /*
-            foreach (var (localTransform, rotateSpeed) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<RotateSpeed>>())
-            {
-                localTransform.ValueRW = localTransform.ValueRO.RotateY(rotateSpeed.ValueRO.value * SystemAPI.Time.DeltaTime);
-            }
-            */
+            state.Enabled = false;
+            return;
+            
+            // foreach (var (localTransform, rotateSpeed) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<RotateSpeed>>().WithAll<Box>())
+            // {
+            //     localTransform.ValueRW = localTransform.ValueRO.RotateY(rotateSpeed.ValueRO.value * SystemAPI.Time.DeltaTime);
+            // }
+            
             var rotatingCubeJob = new RotatingCubeJob
             {
                 deltaTime = SystemAPI.Time.DeltaTime
@@ -30,6 +32,7 @@ namespace LearningDots
     }
 
     [BurstCompile]
+    [WithAll(typeof(Box))]
     public partial struct RotatingCubeJob : IJobEntity
     {
         public float deltaTime;

@@ -7,7 +7,7 @@ namespace LearningDots
     {
         public float value;
 
-        private class Baker : Baker<RotateSpeedAuthoring>
+        public class Baker : Baker<RotateSpeedAuthoring>
         {
             public override void Bake(RotateSpeedAuthoring authoring)
             {
